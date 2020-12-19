@@ -2,16 +2,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t benwyse11/react-test -f client/dockerfile.dev client
+  - docker build -t benwyse11/react-test -f ./client/dockerfile.dev ./client
 
 script:
   - docker run benwyse11/react-test npm test -- --watchAll=false --coverage
 
 after_success:
-  - docker build -t benwyse11/multi-client client
-  - docker build -t benwyse11/multi-nginx nginx
-  - docker build -t benwyse11/multi-server server
-  - docker build -t benwyse11/multi-worker worker
+  - docker build -t benwyse11/multi-client  ./client
+  - docker build -t benwyse11/multi-nginx   ./nginx
+  - docker build -t benwyse11/multi-server  ./server
+  - docker build -t benwyse11/multi-worker  ./worker
   # Log in the the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push all image to docker hub
