@@ -2,8 +2,37 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name":   "client",
-      "image":  "benwyse11/multi-client"
-    } 
+      "name":       "client",
+      "image":      "benwyse11/multi-client",
+      "hostname":   "client",
+      "essential":  false,
+      "memory": 128
+    },
+    {
+      "name":       "server",
+      "image":      "benwyse11/multi-server",
+      "hostname":   "api",
+      "essential":  false,
+      "memory": 128  
+    },
+    {
+      "name":       "worker",
+      "image":      "benwyse11/multi-worker",
+      "essential":  false,
+      "memory": 128  
+    },
+    {
+      "name":       "nginx",
+      "image":      "benwyse11/multi-nginx",
+      "essential":  true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"],
+      "memory": 128
+    }
   ]
 }
