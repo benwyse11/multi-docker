@@ -16,6 +16,6 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push all image to docker hub
   - docker push benwyse11/muli-nginx
-  # - docker push benwyse11/muli-client
-  # - docker push benwyse11/muli-server
-  # - docker push benwyse11/muli-worker
+  - docker push benwyse11/muli-client
+  - docker push benwyse11/muli-server
+  - docker push benwyse11/muli-worker
